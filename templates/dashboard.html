@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('predict') }}">Prediction</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header>
+        <h1 class="greeting">👋 Welcome, {{ username }}</h1>
+        <button id="theme-toggle" class="theme-toggle-btn">🌙 Dark Mode</button>
+      </header>
+
+      <main>
+        <h2 class="main-title"> Credit Card Application Prediction Tool</h2>
+        
+        <p class="intro-text">
+          This application is designed to help financial institutions 
+          <span class="highlight">make quick and reliable decisions</span> on credit card applications.
+        </p>
+
+        <p class="description">
+          Using <span class="highlight-ai">Artificial Intelligence</span>, our system analyzes the information 
+          provided by the applicant (such as <strong>income</strong>, <strong>employment</strong>, <strong>debts</strong>, etc.)
+          and predicts whether the application is likely to be 
+          <span class="status-approved">approved</span> or 
+          <span class="status-declined">declined</span>.
+        </p>
+
+        <div class="benefits">
+          <p>This allows you to:</p>
+          <ul>
+            <li> Save time processing applications</li>
+            <li> Reduce human errors</li>
+            <li> Improve the overall customer experience</li>
+          </ul>
+        </div>
+
+        <p class="final-note">
+          Simply fill out the form with the required information, and our model will provide a prediction in just a few seconds. 🚀
+        </p>
+      </main>
+    </div>
+  </div>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      toggleBtn.textContent = body.classList.contains('dark-theme') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  </script>
+</body>
+</html>

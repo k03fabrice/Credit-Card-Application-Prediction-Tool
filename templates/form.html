@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <button id="toggle-theme" class="theme-btn">🌓 Toggle Theme</button>
+
+  <div class="container">
+    <div class="guide-section">
+      <h3>📝 Input Guide: What Values You Can Enter</h3>
+      <ul>
+        <li><strong>Male:</strong> Enter <code>1</code> for Male or <code>0</code> for Female.</li>
+        <li><strong>Age:</strong> Your age in years (e.g. <code>25.5</code>, <code>42.0</code>).</li>
+        <li><strong>Debt:</strong> Current debt amount in thousands (e.g. <code>0</code>, <code>12.75</code>).</li>
+        <li><strong>Years Employed:</strong> Years employed (e.g. <code>3.5</code>, <code>10</code>).</li>
+        <li><strong>Prior Default:</strong> Enter <code>1</code> if yes, <code>0</code> if not.</li>
+        <li><strong>Employed:</strong> Enter <code>1</code> if currently employed, <code>0</code> if not.</li>
+        <li><strong>Income:</strong> Your yearly income (e.g. <code>15000</code>, <code>4200</code>).</li>
+      </ul>
+    </div>
+
+    <div class="form-section">
+      <h2>📋 Enter Data for Prediction</h2>
+      <form method="post" onsubmit="return validateForm()">
+        {% for var in variables %}
+          <label for="{{ var }}">{{ var }}:</label>
+          <input type="text" id="{{ var }}" name="{{ var }}" required>
+        {% endfor %}
+        <input type="submit" value="🔍 Predict" class="submit-btn">
+      </form>
+      <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function validateForm() {
+      const fields = {
+        'Male': 'binary',
+        'Age': 'numeric',
+        'Debt': 'numeric',
+        'YearsEmployed': 'numeric',
+        'PriorDefault': 'binary',
+        'Employed': 'binary',
+        'Income': 'numeric'
+      };
+
+      for (const [field, type] of Object.entries(fields)) {
+        const input = document.getElementById(field);
+        const value = input.value.trim();
+
+        // Check if numeric
+        if (type === 'numeric' && isNaN(value)) {
+          alert(`${field} must be a number.`);
+          input.focus();
+          return false;
+        }
+
+        // Check if binary (0 or 1 only)
+        if (type === 'binary') {
+          if (!['0', '1'].includes(value)) {
+            alert(`${field} must be either 0 or 1.`);
+            input.focus();
+            return false;
+          }
+        }
+      }
+
+      return true; // All checks passed
+    }
+
+    // Theme toggle functionality
+    const toggleBtn = document.getElementById('toggle-theme');
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Load saved theme on page load
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+    };
+  </script>
+</body>
+</html>
