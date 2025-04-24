@@ -1,0 +1,100 @@
+:root {
+    --bg-color: #f4f6f8;
+    --text-color: #2d3436;
+    --card-bg: #ffffff;
+    --accent-color: #0984e3;
+    --highlight-color: #74b9ff;
+    --danger-color: #d63031;
+    --code-bg: #dfe6e9;
+  }
+  
+  body.dark-mode {
+    --bg-color: #2d3436;
+    --text-color: #f4f6f8;
+    --card-bg: #3b3b3b;
+    --accent-color: #74b9ff;
+    --highlight-color: #0984e3;
+    --danger-color: #ff7675;
+    --code-bg: #636e72;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+  }
+  
+  .result-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .result-card h2 {
+    color: var(--accent-color);
+    margin-top: 0;
+  }
+  
+  .result-message {
+    font-size: 20px;
+    margin: 20px 0;
+  }
+  
+  .approved {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .denied {
+    color: var(--danger-color);
+    font-weight: bold;
+  }
+  
+  a {
+    color: var(--accent-color);
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  #toggle-theme {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 999;
+  }
+  
+  @media (max-width: 768px) {
+    .result-card {
+      padding: 20px;
+    }
+  
+    #toggle-theme {
+      top: 10px;
+      right: 10px;
+    }
+  }
+  
